@@ -33,5 +33,5 @@ const ValidityChecker = (x1, y1, x2, y2) => {
     check(x2, y2, 0, 0);
     check(x1, y1, x2, y2); 
 }
-console.log(ValidityChecker(3, 0, 0, 4));
-console.log(ValidityChecker(2, 1, 1, 1));
+ValidityChecker(3, 0, 0, 4);
+ValidityChecker(2, 1, 1, 1);
