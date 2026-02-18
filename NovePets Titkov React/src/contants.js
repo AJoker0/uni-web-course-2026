@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://crudcrud.com/api/85ec871bcfb240a1b88d3b15b0209abc";
