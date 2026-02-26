@@ -135,7 +135,75 @@
 
 	</div>
 	<script>
-	//TODO...
+		function solve() {
+			// solve all 81 input in one array
+			const inputs = Array.from(document.querySelectorAll('tbody input'));
+			const [checkBtn, clearBtn] = document.querySelectorAll('button');
+			const table = document.querySelector('table');
+			const message = document.querySelector('#check p');
+
+			checkBtn.addEventListener('click', () => {
+				// Convert a flat array of 81 elements into a matrix 9x9
+				const board = [];
+				for (let i = 0; i < 9; i++) {
+					// Cut the array with pieces of 9 elements (.slice)
+					const row = inputs.slice(i * 9, (i + 1) *9).map(input => input.value);
+					board.push(row);
+				}
+				let isSolved = true;
+
+				// check of lines and columns
+				for (let i = 0; i < 9; i++) {
+					const row = board[i];
+					const col = board.map(r => r[i]);
+
+					// If there is an empty cell ("") or size Set is less than 9 -> error
+					if (row.includes("") || new Set(row).size !== 9 || new Set(col).size !== 9) {
+						isSolved = false;
+						break;
+					}
+				}
+				// check of 3x3 squares
+				if (isSolved) {
+					// go through sectors
+					for (let rowOffset = 0; rowOffset < 9; rowOffset += 3) {
+						for (let colOffset = 0; colOffset < 9; colOffset += 3) {
+
+							const square = [];
+							// Collecting 9 digits within one small square
+							for (let r = 0; r < 3; r++) {
+								for (let c = 0; c < 3; c++) {
+									square.push(board[rowOffset + r][colOffset + c]);
+								}
+							}
+							if (new Set(square).size !== 9) {
+								isSolved = false;
+								break;
+							}
+						}
+					}
+				}
+				// show the result
+				if (isSolved) {
+					table.style.border = '2px solid green';
+					message.style.color = 'green';
+					message.textContent = 'You solve it! Congratulations!';
+				} else {
+					table.style.border = '2px solid red';
+					message.style.color = 'red';
+					message.textContent = 'NOP! You are not done yet...';
+				}
+			});
+			// button clear
+			clearBtn.addEventListener('click', () => {
+				inputs.forEach(input => input.value = '');
+				table.style.border = 'none';
+				message.textContent = '';
+
+
+			});
+		}
+		solve();
 	</script>
 </body>
 
