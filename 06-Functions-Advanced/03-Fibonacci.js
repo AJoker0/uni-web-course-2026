@@ -90,3 +90,17 @@ console.log(fib()); // 1
 console.log(fib()); // 1
 console.log(fib()); // 2
 console.log(fib()); // 3 */
+
+
+
+
+/* function getFibonatorPro() {
+    let [a, b] = [0, 1];
+
+    return function() {
+        let result = b;
+
+        [a, b] = [b, a + b];
+        return result;
+    }
+} */
